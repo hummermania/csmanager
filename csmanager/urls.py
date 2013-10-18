@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'csmanager.views.home', name='home'),
+    url(r'^$', 'core.views.home_page', name='home'),
     # url(r'^csmanager/', include('csmanager.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
