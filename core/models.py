@@ -2,15 +2,18 @@ from django.db import models
 from django.contrib import admin
 
 # Create your models here.
-class Servers(models.Model):
+class Server(models.Model):
     name = models.CharField(max_length = 100, blank = False)
     ip = models.CharField(max_length = 15)
 
     def __str__(self):
-        return self.name
+        return self.name + ", ipv4 = " + self.ip
 
 # Create your models here.
-class Clients(models.Model):
-    server_id = models.ForeignKey(Servers)
+class Client(models.Model):
+    server_id = models.ForeignKey(Server)
     name = models.CharField(max_length=100, blank = False)
     active = models.BooleanField(default = False)
+    
+    def __str__(self):
+        return self.name
