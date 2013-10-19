@@ -17,28 +17,18 @@ class Client(models.Model):
     active = models.BooleanField(default = True)
     
     def __unicode__(self):
-        #TODO: Add Server name before client name
-        return self.name
+        return u'[%s],  Client = "%s"' % (self.server_id.name, self.name)
 
-
-    def validate_unique(self, exclude=None):
-        super(Client, self).validate_unique()
-        query_set = Client.objects.filter(name=self.name)
-        if query_set.filter(server_id=self.server_id).exists():
-            raise ValidationError(
-                {
-                    NON_FIELD_ERRORS:
-                    ('Client name must be unique per Server!',)
-                }
-            )
 
     def save(self, *args, **kwargs):
-
-        self.validate_unique()
+        if self.pk is not None:
+            orig = self.__class__.objects.get(pk = self.pk)
+            old_server = orig.server_id
+            new_server = self.server_id
+            if orig.active == False and old_server != new_server:
+                raise ValidationError("Inactive client can't move to another server")
 
         super(Client, self).save(*args, **kwargs)
     
-    # If we use unique_together it override "validate_unique" on the low level
-    # and don't allow to raise custom error message
-    #class Meta:
-        #unique_together = ("server_id", "name")
+    class Meta:
+        unique_together = ("server_id", "name")
