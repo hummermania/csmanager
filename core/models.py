@@ -26,7 +26,7 @@ class Client(models.Model):
             old_server = orig.server_id
             new_server = self.server_id
             if old_server != new_server: # only when the server change
-                if orig.active == False or self.active == False:
+                if self.active == False: # only new state is importand
                     raise ValidationError("Inactive client can't move to another server")
 
         super(Client, self).save(*args, **kwargs)
