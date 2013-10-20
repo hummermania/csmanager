@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib import admin
+from django.forms import CheckboxInput
+
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 
 # Create your models here.
@@ -14,13 +16,14 @@ class Server(models.Model):
 class Client(models.Model):
     server_id = models.ForeignKey(Server)
     name = models.CharField(max_length=100, blank = False)
-    active = models.BooleanField(default = True)
+    active = models.BooleanField(default = True, widget=CheckboxInput)
     
     def __unicode__(self):
         return u'[%s],  Client = "%s"' % (self.server_id.name, self.name)
 
 
     def save(self, *args, **kwargs):
+        # TODO: Find why boolean field "active" not save in retquest
         if self.pk is not None:
             orig = self.__class__.objects.get(pk = self.pk)
             old_server = orig.server_id

@@ -27,12 +27,12 @@ def client_index(request):
 
 @render_to('clients.html')
 def client_details(request, client_id):
-	# TODO: Saving data in progress...
 	if request.method == 'POST':
-		client = get_object_or_404(Client, pk = client_id)#request.POST.get('client_id'))
 		form = ClientForm(request.POST)
 		if form.is_valid():
-			form.save()
+			new_client = form.save(commit = False)
+			new_client.id = client_id
+			new_client.save()
 		return redirect('client_index')
 
 	else:
