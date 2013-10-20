@@ -27,6 +27,7 @@ def client_index(request):
 
 @render_to('clients.html')
 def client_details(request, client_id):
+	# TODO: Find why boolean field "active" not save in request
 	if request.method == 'POST':
 		form = ClientForm(request.POST)
 		if form.is_valid():
@@ -36,8 +37,6 @@ def client_details(request, client_id):
 		return redirect('client_index')
 
 	else:
-		# TODO: On this code rendering form haven't PK of model, 
-		# and every save - create new object in database
 		client = get_object_or_404(Client, pk = client_id)
 		form = ClientForm(instance = client)
 		return {'form' : form }	
