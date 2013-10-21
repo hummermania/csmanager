@@ -25,7 +25,7 @@ where user - is your local user account.
 When we need to install database backend. In this example I use PostgresSQL database.
 
 ```
-sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install postgresql postgresql-contrib python-psycopg2
 
 sudo su - postgres
 
