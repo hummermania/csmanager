@@ -30,11 +30,14 @@ sudo apt-get install postgresql postgresql-contrib
 sudo su - postgres
 
 createdb django_db
-createuser --username=postgres -SDRP
+
+# Role name: django_login
+# Pass: django
+createuser --username=postgres -SDRP  
+
 logout
 ```
 
-On last command you will be promted for user password, say them:  django
 You may use another database name and user name, but don't forget to change the settings.py in the
 project folder in the DATABASES dict.
 
