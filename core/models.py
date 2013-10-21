@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 # Create your models here.
 class Server(models.Model):
     name = models.CharField(max_length = 100, blank = False)
-    ip = models.CharField(max_length = 15)
+    ip = models.GenericIPAddressField(protocol = 'both')
 
     def __unicode__(self):
         return u'%s, ipv4 = %s' % (self.name, self.ip)
