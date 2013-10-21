@@ -30,7 +30,7 @@ sudo apt-get install postgresql postgresql-contrib
 sudo su - postgres
 
 createdb django_db
-createuser --username=django_login -SDRP
+createuser --username=postgres -SDRP
 logout
 ```
 
