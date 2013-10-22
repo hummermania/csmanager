@@ -74,6 +74,3 @@ python manage.py runserver
   command. In the admin page you can create some group and user in this group what can login into the admin part.
   Set for this user permission to enable create, editing and delete "core-client" item. It will allow to some user
   work on client, and move it from/to another server.
- 
-
-
