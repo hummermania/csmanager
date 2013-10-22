@@ -11,6 +11,7 @@ First install Django framework in your system, or virtualenv
 ```
 sudo pip install Django
 sudo pip install django-annoying
+sudo pip install django-debug-toolbar
 ```
 
 Make or change (if it exists) the directory where all Django web projects is located
