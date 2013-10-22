@@ -12,12 +12,14 @@ The first thing to do install dependencies
 sudo apt-get install postgresql build-dep postgresql-contrib python-psycopg2
 ```
 
-When we can set our clear virtualenv
+When we can set our clear virtualenv. The path of Django project may be ~/Projects, /opt/, /usr/local/
+It's very important to the security of web application.
 
 ```
 virtualenv /path/to/venv/  --no-site-packages
 source /path/to/venv/bin/activate
 ```
+
 You will switch to this virtual environments, but can't have some packages to run Django project.
 Run the next command to get the packages needed to run our project. All version of package is set in
 requirements.txt. And you can change it to another if you have any troubles.
