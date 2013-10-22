@@ -15,20 +15,20 @@ YES_NO = (
 
 # Create your models here.
 class Server(models.Model):
-    name = models.CharField(max_length = 100, blank = False)
-    ip = models.GenericIPAddressField(protocol = 'both')
+    name = models.CharField(max_length = 100, blank = False, unique= True)
+    ip = models.GenericIPAddressField(protocol = 'both', unique= True)
 
     def __unicode__(self):
-        return u'%s, %s, ipv4 = %s' % (self.pk, self.name, self.ip)
+        return u'%s, ipv4 = %s' % (self.name, self.ip)
 
 
 class Client(models.Model):
     server_id = models.ForeignKey(Server)
     name = models.CharField(max_length=100, blank = False)
-    active = models.BooleanField()#choices = YES_NO)
+    active = models.BooleanField(default = True)#choices = YES_NO)
     
     def __unicode__(self):
-        return u'[%s],  Client = "%s"' % (self.server_id.name, self.name)
+        return u'[%s],  Client = "%s", Active = "%s"' % (self.server_id.name, self.name, self.active)
 
     
     class Meta:

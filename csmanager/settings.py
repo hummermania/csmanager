@@ -7,8 +7,6 @@ PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))+"/../"
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-INTERNAL_IPS = ('127.0.0.1',)
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -165,4 +163,18 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+
+################################################################
+###  Settings for django-debug-toolbar
+###
+INTERNAL_IPS = ('127.0.0.1',)
+
+def custom_show_toolbar(request):
+    return True # Always show toolbar
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
 }
