@@ -6,27 +6,29 @@ Test Django project to manage Server and their Client.
 Install
 =======
 
-First install Django framework in your system, or virtualenv
+The first thing to do install dependencies
 
 ```
-sudo pip install Django
-sudo pip install django-annoying
+sudo apt-get install postgresql build-dep postgresql-contrib python-psycopg2
 ```
 
-Make or change (if it exists) the directory where all Django web projects is located
+When we can set our clear virtualenv
 
 ```
-sudo mkdir /webapps
-sudo chown user:user /webapps
+virtualenv /path/to/venv/  --no-site-packages
+source /path/to/venv/bin/activate
 ```
- 
-where user - is your local user account.
+You will switch to this virtual environments, but can't have some packages to run Django project.
+Run the next command to get the packages needed to run our project. All version of package is set in
+requirements.txt. And you can change it to another if you have any troubles.
+
+```
+pip install -r requirements.txt
+```
 
 When we need to install database backend. In this example I use PostgresSQL database.
 
 ```
-sudo apt-get install postgresql postgresql-contrib python-psycopg2
-
 sudo su - postgres
 
 createdb django_db
@@ -42,7 +44,7 @@ You may use another database name and user name, but don't forget to change the 
 project folder in the DATABASES dict.
 
 ```
-cd /webapps
+cd /path/to/venv/
 git clone git@github.com:hummermania/csmanager.git
 cd csmanager
 ```
@@ -50,15 +52,25 @@ cd csmanager
  This clone the project from github. And you can run the develop server
 
  ```
- python manage.py createsuperuser  # for example: root:root
  python manage.py syncdb
- python manage.py runserver
  ```
+
+ You will be asked that you don't have any superuser defined. Accept this and enter some
+ superuser name, email and pass. For example:
+    name: root
+   email: root@mail.ru   ;-)
+    pass: root
+
+Congratulations!!! You can try to run our developer server
+
+```
+python manage.py runserver
+```
 
   If in the prev step you can't have some errors - you can open the URL http://localhost:8000/ in
   the browser and see the main page of project. If you see some error - please create new issue in Issue page on this project.
 
-  When go to http://localhost:8000/admin/ and use authorisation info what you set in 'createsuperuser'
+  When go to http://localhost:8000/admin/ and use authorisation info what you set in 'syncdb'
   command. In the admin page you can create some group and user in this group what can login into the admin part.
   Set for this user permission to enable create, editing and delete "core-client" item. It will allow to some user
   work on client, and move it from/to another server.
