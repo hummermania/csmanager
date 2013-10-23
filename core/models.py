@@ -15,7 +15,7 @@ class Server(models.Model):
 class Client(models.Model):
     server_id = models.ForeignKey(Server)
     name = models.CharField(max_length=100, blank = False)
-    active = models.BooleanField(default = True)#choices = YES_NO)
+    active = models.BooleanField(default = True)
     
     def __unicode__(self):
         return u'[%s],  Client = "%s", Active = "%s"' % (self.server_id.name, self.name, self.active)

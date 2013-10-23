@@ -1,7 +1,7 @@
 <html>
 <head>{{page_title}}</head>
 <body>
-    <p><a href="/clients/">Client list. </a></p>
+    <p><a href="/">Home. </a></p>
     {% if clients %}
     <ul>
         {% for client in clients %}
@@ -15,6 +15,7 @@
     {% endif %}
 
     {% if form %}
+    <p><a href="/clients/">Client list. </a></p>
         <form method="POST" action = "" >{% csrf_token %}
            
             {{ form.as_p }}  

@@ -1,19 +1,18 @@
-import logging
-
 from django.http import Http404
 from django.shortcuts import redirect, get_object_or_404
-from django.forms import ModelForm, BooleanField, RadioSelect
-from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.forms import ModelForm
 
 from annoying.decorators import render_to
 
-from core.models import Client
-
-logger = logging.getLogger(__name__)
+from core.models import Client, Server
 
 class ClientForm(ModelForm):
     class Meta:
         model = Client
+
+class ServerForm(ModelForm):
+    class Meta:
+        model = Server
 
 @render_to('home.html')
 def home_page(request):
@@ -48,3 +47,27 @@ def client_details(request, client_id):
         form = ClientForm(instance = client)
         return {'form' : form } 
 
+
+
+@render_to('servers.html')
+def server_index(request):
+    servers = Server.objects.all()
+    return {'servers': servers}
+
+
+@render_to('servers.html')
+def server_details(request, server_id):
+    if request.method == 'POST':
+        server = Server.objects.get(pk=server_id)
+        server_form = ServerForm(request.POST, instance = server)
+
+        if server_form.is_valid():
+            server_form.save()
+        return {'form' : server_form} #redirect('client_index')
+
+    else:
+        server = get_object_or_404(Server, pk = server_id)
+        form = ServerForm(instance = server)
+
+        client_list = Client.objects.filter(server_id = server.pk)
+        return {'form': form, 'client_list' : client_list } 
