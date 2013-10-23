@@ -10,6 +10,7 @@ class Server(models.Model):
     
     class Meta:
         unique_together = ("name", "ip")
+        get_latest_by = "name"
 
 
 class Client(models.Model):
@@ -23,3 +24,4 @@ class Client(models.Model):
     
     class Meta:
         unique_together = ("server_id", "name")
+        get_latest_by = "server_id"
