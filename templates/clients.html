@@ -5,7 +5,7 @@
     {% if clients %}
     <ul>
         {% for client in clients %}
-            <li><a href="/client/{{ client.id }}/">{{ client.server_id }}&nbsp;{{ client.name }}</a></li>
+            <li><a href="/client/{{ client.id }}/">{{ client.server_id }},&nbsp;{{ client.name }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}

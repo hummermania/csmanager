@@ -22,7 +22,7 @@ def home_page(request):
 
 @render_to('clients.html')
 def client_index(request):
-    clients = Client.objects.all()
+    clients = Client.objects.all().order_by('server_id')
     return {'clients': clients}
 
 
@@ -39,7 +39,6 @@ def client_details(request, client_id):
         
         if client_form.is_valid():
             client_form.save()
-            logger.info("Save client!")
         return {'form' : client_form} #redirect('client_index')
 
     else:
@@ -51,7 +50,7 @@ def client_details(request, client_id):
 
 @render_to('servers.html')
 def server_index(request):
-    servers = Server.objects.all()
+    servers = Server.objects.all().order_by('name')
     return {'servers': servers}
 
 
@@ -67,7 +66,8 @@ def server_details(request, server_id):
 
     else:
         server = get_object_or_404(Server, pk = server_id)
+
         form = ServerForm(instance = server)
 
-        client_list = Client.objects.filter(server_id = server.pk)
+        client_list = Client.objects.filter(server_id = server.pk).order_by('name')
         return {'form': form, 'client_list' : client_list } 
