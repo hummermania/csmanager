@@ -9,7 +9,7 @@ Install
 The first thing to do install dependencies
 
 ```
-sudo apt-get install postgresql build-dep postgresql-contrib python-psycopg2
+sudo apt-get install postgresql python-dev build-essential postgresql-contrib python-psycopg2
 ```
 
 When we can set our clear virtualenv. The path of Django project may be ~/Projects, /opt/, /usr/local/
